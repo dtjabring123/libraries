@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Libraries.Domain\Libraries.Domain.csproj" />
-	  <ProjectReference Include="..\Libraries.Infrastructure\Libraries.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
 ﻿using Libraries.Application.Interfaces;
+
 using Libraries.Application.Services.Interfaces;
 using Libraries.Domain.Entities;
 
@@ -15,8 +16,7 @@ namespace Libraries.Application.Services
 
         public async Task<List<Library>> GetAll()
         {
-            var libraries = await libraryRepository.GetAll();
-            return libraries;
+            return await libraryRepository.GetAll();
         }
 
         public async Task Add(Library library)
