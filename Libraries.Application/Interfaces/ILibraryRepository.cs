@@ -4,8 +4,8 @@ namespace Libraries.Application.Interfaces
 {
     public interface ILibraryRepository
     {
-        public Task<List<Library>> GetAll();
+        public Task<List<LibraryEntity>> GetAll();
 
-        public Task Add(Library library);
+        public Task<LibraryEntity> Add(LibraryEntity library);
     }
 }

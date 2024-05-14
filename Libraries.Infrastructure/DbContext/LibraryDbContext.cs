@@ -13,6 +13,6 @@ namespace Libraries.Infrastructure.Persistence
         {
         }
 
-        internal DbSet<Library> Libraries { get; set; }
+        internal DbSet<LibraryEntity> Libraries { get; set; }
     }
 }

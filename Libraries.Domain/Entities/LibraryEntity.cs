@@ -1,6 +1,6 @@
 ﻿namespace Libraries.Domain.Entities
 {
-    public class Library
+    public class LibraryEntity
     {
         public int Id { get; set; }
 

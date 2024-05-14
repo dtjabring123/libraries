@@ -15,16 +15,16 @@ namespace Libraries.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<List<Library>> GetAll()
+        public async Task<List<LibraryEntity>> GetAll()
         {
-            var libraries = await _dbContext.Libraries.ToListAsync();
-            return libraries;
+            return await _dbContext.Libraries.ToListAsync();
         }
 
-        public async Task Add(Library library)
+        public async Task<LibraryEntity> Add(LibraryEntity library)
         {
             await _dbContext.AddAsync(library);
             await _dbContext.SaveChangesAsync();
+            return library;
         }
     }
 }

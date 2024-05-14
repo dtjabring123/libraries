@@ -1,3 +1,5 @@
+using AutoMapper;
+using Libraries.Api;
 using Libraries.Application;
 using Libraries.Infrastructure;
 using Libraries.Infrastructure.Persistence;
@@ -20,7 +22,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.RegisterInfrastructureDependencies();
-builder.Services.RegisterApplicationDependencies();
+builder.Services.RegisterMediatRDependencies();
+
+var mapperConfig = new MapperConfiguration(mc =>
+{
+    mc.AddProfile(new MappingProfile());
+});
+IMapper mapper = mapperConfig.CreateMapper();
+
+builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
 

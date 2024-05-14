@@ -1,14 +1,15 @@
-﻿using Libraries.Application.Services;
-using Libraries.Application.Services.Interfaces;
+﻿using Libraries.Application.Commands;
+using Libraries.Application.Queries;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Libraries.Application
 {
     public static class IServiceCollectionExtensions
     {
-        public static void RegisterApplicationDependencies(this IServiceCollection services)
+        public static void RegisterMediatRDependencies(this IServiceCollection services)
         {
-            services.AddScoped<ILibraryService, LibraryService>();
+            services.AddMediatR(option => option.RegisterServicesFromAssemblies(typeof(GetAllLibrariesQuery).Assembly));
+            services.AddMediatR(option => option.RegisterServicesFromAssemblies(typeof(AddLibraryCommand).Assembly));
         }
     }
 }

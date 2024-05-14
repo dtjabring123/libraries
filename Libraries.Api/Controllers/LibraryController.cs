@@ -1,28 +1,35 @@
-﻿using Libraries.Application.Services.Interfaces;
-using Libraries.Domain.Entities;
+﻿using Libraries.Application.Commands;
+using Libraries.Application.Dtos;
+using Libraries.Application.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Libraries.Api.Controllers
 {
+    [ApiController]
     public class LibraryController : ControllerBase
     {
-        private readonly ILibraryService _libraryService;
+        private readonly IMediator _mediator;
 
-        public LibraryController(ILibraryService libraryService)
+        public LibraryController(IMediator mediator)
         {
-            _libraryService = libraryService;
+            _mediator = mediator;
         }
 
         [HttpGet(nameof(GetAll))]
-        public async Task<ActionResult<IList<Library>>> GetAll()
+        public async Task<ActionResult<IEnumerable<LibraryDto>>> GetAll()
         {
-            return Ok(await _libraryService.GetAll());
+            var query = new GetAllLibrariesQuery();
+            var results = await _mediator.Send(query);
+            return Ok(results);
         }
 
         [HttpPost(nameof(Add))]
-        public async Task Add(Library library)
+        public async Task<ActionResult<LibraryDto>> Add(LibraryDto library)
         {
-            await _libraryService.Add(library);
+            var command = new AddLibraryCommand(library);
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
     }
 }
