@@ -17,6 +17,8 @@ namespace Libraries.Api.Controllers
         }
 
         [HttpGet(nameof(GetAll))]
+        [ProducesResponseType<IEnumerable<LibraryDto>>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<IEnumerable<LibraryDto>>> GetAll()
         {
             var query = new GetAllLibrariesQuery();
@@ -25,6 +27,8 @@ namespace Libraries.Api.Controllers
         }
 
         [HttpPost(nameof(Add))]
+        [ProducesResponseType<LibraryDto>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<LibraryDto>> Add(LibraryDto library)
         {
             var command = new AddLibraryCommand(library);
