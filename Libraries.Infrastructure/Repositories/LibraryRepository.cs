@@ -17,13 +17,25 @@ namespace Libraries.Infrastructure.Repositories
 
         public async Task<List<LibraryEntity>> GetAll()
         {
-            return await _dbContext.Libraries.ToListAsync();
+            return await _dbContext.Libraries.Where(_ => _.IsDeleted==false).ToListAsync();
         }
 
         public async Task<LibraryEntity> Add(LibraryEntity library)
         {
             await _dbContext.AddAsync(library);
             await _dbContext.SaveChangesAsync();
+            return library;
+        }
+
+        public async Task<LibraryEntity> Delete(int id)
+        {
+            var library = await _dbContext.Libraries.FirstOrDefaultAsync(_ => _.Id == id);
+            if (library != null)
+            {
+                library.IsDeleted = true;
+                _dbContext.Update(library);
+                await _dbContext.SaveChangesAsync();
+            }
             return library;
         }
     }

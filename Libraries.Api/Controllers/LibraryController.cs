@@ -35,5 +35,15 @@ namespace Libraries.Api.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+
+        [HttpPost(nameof(Delete))]
+        [ProducesResponseType<LibraryDto>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<LibraryDto>> Delete(int id)
+        {
+            var command = new DeleteLibraryCommand(id);
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
     }
 }

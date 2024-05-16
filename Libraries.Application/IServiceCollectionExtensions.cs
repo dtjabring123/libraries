@@ -10,6 +10,7 @@ namespace Libraries.Application
         {
             services.AddMediatR(option => option.RegisterServicesFromAssemblies(typeof(GetAllLibrariesQuery).Assembly));
             services.AddMediatR(option => option.RegisterServicesFromAssemblies(typeof(AddLibraryCommand).Assembly));
+            services.AddMediatR(option => option.RegisterServicesFromAssemblies(typeof(DeleteLibraryCommand).Assembly));
         }
     }
 }
