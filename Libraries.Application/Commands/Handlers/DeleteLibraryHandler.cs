@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Libraries.Application.Commands.Handlers
 {
-    public class DeleteLibraryHandler : IRequestHandler<DeleteLibraryCommand,LibraryDto>
+    public class DeleteLibraryHandler : IRequestHandler<DeleteLibraryCommand, LibraryDto>
     {
         public readonly ILibraryRepository _libraryRepository;
         public readonly IMapper _mapper;
