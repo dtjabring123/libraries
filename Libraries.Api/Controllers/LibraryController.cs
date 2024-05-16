@@ -45,5 +45,15 @@ namespace Libraries.Api.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+
+        [HttpGet(nameof(GetById))]
+        [ProducesResponseType<IEnumerable<LibraryDto>>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<LibraryDto>> GetById(int id)
+        {
+            var query = new GetLibraryByIdQuery(id);
+            var results = await _mediator.Send(query);
+            return Ok(results);
+        }
     }
 }

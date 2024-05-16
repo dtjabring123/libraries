@@ -35,8 +35,27 @@ namespace Libraries.Infrastructure.Repositories
                 library.IsDeleted = true;
                 _dbContext.Update(library);
                 await _dbContext.SaveChangesAsync();
+                return library;
             }
-            return library;
+            else
+            {
+                return null;
+            }
+
+        }
+
+        public async Task<LibraryEntity> GetById(int id)
+        {
+            var library = await _dbContext.Libraries.FirstOrDefaultAsync(_ => _.Id == id);
+            if (library != null && !library.IsDeleted)
+            {
+                return library;
+            }
+            else
+            {
+                return null;
+            }
+
         }
     }
 }

@@ -9,5 +9,7 @@ namespace Libraries.Application.Interfaces
         public Task<LibraryEntity> Add(LibraryEntity library);
 
         public Task<LibraryEntity> Delete(int id);
+
+        public Task<LibraryEntity> GetById(int id);
     }
 }
