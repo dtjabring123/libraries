@@ -41,7 +41,6 @@ namespace Libraries.Infrastructure.Repositories
             {
                 return null;
             }
-
         }
 
         public async Task<LibraryEntity> GetById(int id)
@@ -55,7 +54,6 @@ namespace Libraries.Infrastructure.Repositories
             {
                 return null;
             }
-
         }
     }
 }
