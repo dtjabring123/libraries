@@ -13,6 +13,11 @@ namespace Libraries.Infrastructure.Persistence
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<LibraryEntity>().HasQueryFilter(library => !library.IsDeleted);
+        }
+
         internal DbSet<LibraryEntity> Libraries { get; set; }
     }
 }

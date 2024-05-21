@@ -17,7 +17,7 @@ namespace Libraries.Infrastructure.Repositories
 
         public async Task<List<LibraryEntity>> GetAll()
         {
-            return await _dbContext.Libraries.Where(_ => _.IsDeleted == false).ToListAsync();
+            return await _dbContext.Libraries.ToListAsync();
         }
 
         public async Task<LibraryEntity> Add(LibraryEntity library)
