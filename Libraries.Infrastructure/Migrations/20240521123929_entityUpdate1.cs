@@ -8,6 +8,22 @@ namespace Libraries.Infrastructure.Migrations
     public partial class entityUpdate1 : Migration
     {
         /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "BookEntity");
+
+            migrationBuilder.DropTable(
+                name: "AuthorEntity");
+
+            migrationBuilder.DropTable(
+                name: "UserEntity");
+
+            migrationBuilder.DropTable(
+                name: "Libraries");
+        }
+
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -116,22 +132,6 @@ namespace Libraries.Infrastructure.Migrations
                 name: "IX_UserEntity_LibraryId",
                 table: "UserEntity",
                 column: "LibraryId");
-        }
-
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "BookEntity");
-
-            migrationBuilder.DropTable(
-                name: "AuthorEntity");
-
-            migrationBuilder.DropTable(
-                name: "UserEntity");
-
-            migrationBuilder.DropTable(
-                name: "Libraries");
         }
     }
 }

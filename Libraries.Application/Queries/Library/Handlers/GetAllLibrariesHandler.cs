@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Libraries.Application.Dtos;
-using Libraries.Application.Queries.Library;
 using Libraries.Domain.Interfaces;
 using MediatR;
 

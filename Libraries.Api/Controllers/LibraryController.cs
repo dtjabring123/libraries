@@ -32,12 +32,12 @@ namespace Libraries.Api.Controllers
             return Ok(await _mediator.Send(new DeleteLibraryCommand(id)));
         }
 
-        [HttpPost(nameof(Update))]
-        [ProducesResponseType<LibraryDto>(StatusCodes.Status200OK)]
+        [HttpGet(nameof(GetAll))]
+        [ProducesResponseType<IEnumerable<LibraryDto>>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<LibraryDto>> Update(LibraryDto library)
+        public async Task<ActionResult<IEnumerable<LibraryDto>>> GetAll()
         {
-            return Ok(await _mediator.Send(new UpdateLibraryCommand(library)));
+            return Ok(await _mediator.Send(new GetAllLibrariesQuery()));
         }
 
         [HttpGet(nameof(GetById))]
@@ -48,12 +48,12 @@ namespace Libraries.Api.Controllers
             return Ok(await _mediator.Send(new GetLibraryByIdQuery(id)));
         }
 
-        [HttpGet(nameof(GetAll))]
-        [ProducesResponseType<IEnumerable<LibraryDto>>(StatusCodes.Status200OK)]
+        [HttpPost(nameof(Update))]
+        [ProducesResponseType<LibraryDto>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<LibraryDto>>> GetAll()
+        public async Task<ActionResult<LibraryDto>> Update(LibraryDto library)
         {
-            return Ok(await _mediator.Send(new GetAllLibrariesQuery()));
+            return Ok(await _mediator.Send(new UpdateLibraryCommand(library)));
         }
     }
 }

@@ -6,12 +6,12 @@ namespace Libraries.Domain.Interfaces
     {
         public Task<LibraryEntity> Add(LibraryEntity library);
 
-        public Task<LibraryEntity> Update(LibraryEntity library);
-
         public Task<LibraryEntity> Delete(int id);
+
+        public Task<List<LibraryEntity>> GetAll();
 
         public Task<LibraryEntity> GetById(int id);
 
-        public Task<List<LibraryEntity>> GetAll();
+        public Task<LibraryEntity> Update(LibraryEntity library);
     }
 }

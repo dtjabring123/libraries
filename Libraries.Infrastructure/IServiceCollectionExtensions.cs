@@ -9,6 +9,7 @@ namespace Libraries.Infrastructure
         public static void RegisterInfrastructureDependencies(this IServiceCollection services)
         {
             services.AddScoped<ILibraryRepository, LibraryRepository>();
+            services.AddScoped<IBookRepository, BookRepository>();
         }
     }
 }
