@@ -3,28 +3,34 @@ using Libraries.Application.Dtos;
 using Libraries.Domain.Entities;
 using Libraries.Domain.Interfaces;
 using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Libraries.Application.Commands.Library.Handlers
 {
-    public class AddLibraryHandler : IRequestHandler<AddLibraryCommand, LibraryDto>
+    public class UpdateLibraryHandler : IRequestHandler<UpdateLibraryCommand, LibraryDto>
     {
         public readonly ILibraryRepository _libraryRepository;
         private readonly IMapper _mapper;
 
-        public AddLibraryHandler(ILibraryRepository libraryRepository, IMapper mapper)
+        public UpdateLibraryHandler(ILibraryRepository libraryRepository, IMapper mapper)
         {
             _libraryRepository = libraryRepository;
             _mapper = mapper;
         }
 
-        public async Task<LibraryDto> Handle(AddLibraryCommand command, CancellationToken cancellationToken)
+        public async Task<LibraryDto> Handle(UpdateLibraryCommand command, CancellationToken cancellationToken)
         {
             var library = new LibraryEntity
             {
+                Id = command.Id,
                 Name = command.Name,
                 Description = command.Description
             };
-            return _mapper.Map<LibraryDto>(await _libraryRepository.Add(library));
+            return _mapper.Map<LibraryDto>(await _libraryRepository.Update(library));
         }
     }
 }

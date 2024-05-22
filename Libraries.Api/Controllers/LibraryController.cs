@@ -16,18 +16,10 @@ namespace Libraries.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet(nameof(GetAll))]
-        [ProducesResponseType<IEnumerable<LibraryDto>>(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<LibraryDto>>> GetAll()
-        {
-            return Ok(await _mediator.Send(new GetAllLibrariesQuery()));
-        }
-
         [HttpPost(nameof(Add))]
         [ProducesResponseType<LibraryDto>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<LibraryDto>> Add(LibraryDto library)
+        public async Task<ActionResult<LibraryDto>> Add(AddLibraryDto library)
         {
             return Ok(await _mediator.Send(new AddLibraryCommand(library)));
         }
@@ -40,12 +32,28 @@ namespace Libraries.Api.Controllers
             return Ok(await _mediator.Send(new DeleteLibraryCommand(id)));
         }
 
+        [HttpPost(nameof(Update))]
+        [ProducesResponseType<LibraryDto>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<LibraryDto>> Update(LibraryDto library)
+        {
+            return Ok(await _mediator.Send(new UpdateLibraryCommand(library)));
+        }
+
         [HttpGet(nameof(GetById))]
         [ProducesResponseType<IEnumerable<LibraryDto>>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<LibraryDto>> GetById(int id)
         {
             return Ok(await _mediator.Send(new GetLibraryByIdQuery(id)));
+        }
+
+        [HttpGet(nameof(GetAll))]
+        [ProducesResponseType<IEnumerable<LibraryDto>>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<LibraryDto>>> GetAll()
+        {
+            return Ok(await _mediator.Send(new GetAllLibrariesQuery()));
         }
     }
 }
