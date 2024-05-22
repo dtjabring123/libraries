@@ -1,7 +1,7 @@
 ﻿using Libraries.Application.Dtos;
 using MediatR;
 
-namespace Libraries.Application.Commands
+namespace Libraries.Application.Commands.Library
 {
     public class AddLibraryCommand : IRequest<LibraryDto>
     {

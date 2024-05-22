@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
 using Libraries.Application.Dtos;
+using Libraries.Application.Queries.Library;
 using Libraries.Domain.Interfaces;
 using MediatR;
 
-namespace Libraries.Application.Queries.Handlers
+namespace Libraries.Application.Queries.Library.Handlers
 {
     public class GetAllLibrariesHandler : IRequestHandler<GetAllLibrariesQuery, IEnumerable<LibraryDto>>
     {

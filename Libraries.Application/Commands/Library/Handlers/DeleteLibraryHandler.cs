@@ -3,7 +3,7 @@ using Libraries.Application.Dtos;
 using Libraries.Domain.Interfaces;
 using MediatR;
 
-namespace Libraries.Application.Commands.Handlers
+namespace Libraries.Application.Commands.Library.Handlers
 {
     public class DeleteLibraryHandler : IRequestHandler<DeleteLibraryCommand, LibraryDto>
     {

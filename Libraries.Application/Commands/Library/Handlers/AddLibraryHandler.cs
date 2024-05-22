@@ -4,7 +4,7 @@ using Libraries.Domain.Entities;
 using Libraries.Domain.Interfaces;
 using MediatR;
 
-namespace Libraries.Application.Commands.Handlers
+namespace Libraries.Application.Commands.Library.Handlers
 {
     public class AddLibraryHandler : IRequestHandler<AddLibraryCommand, LibraryDto>
     {
@@ -24,8 +24,7 @@ namespace Libraries.Application.Commands.Handlers
                 Name = command.Name,
                 Description = command.Description
             };
-            var result = await _libraryRepository.Add(libraryEntity);
-            return _mapper.Map<LibraryDto>(result);
+            return _mapper.Map<LibraryDto>(await _libraryRepository.Add(libraryEntity));
         }
     }
 }

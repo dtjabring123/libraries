@@ -1,6 +1,6 @@
-﻿using Libraries.Application.Commands;
+﻿using Libraries.Application.Commands.Library;
 using Libraries.Application.Dtos;
-using Libraries.Application.Queries;
+using Libraries.Application.Queries.Library;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,9 +21,7 @@ namespace Libraries.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<IEnumerable<LibraryDto>>> GetAll()
         {
-            var query = new GetAllLibrariesQuery();
-            var results = await _mediator.Send(query);
-            return Ok(results);
+            return Ok(await _mediator.Send(new GetAllLibrariesQuery()));
         }
 
         [HttpPost(nameof(Add))]
@@ -31,9 +29,7 @@ namespace Libraries.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<LibraryDto>> Add(LibraryDto library)
         {
-            var command = new AddLibraryCommand(library);
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            return Ok(await _mediator.Send(new AddLibraryCommand(library)));
         }
 
         [HttpPost(nameof(Delete))]
@@ -41,9 +37,7 @@ namespace Libraries.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<LibraryDto>> Delete(int id)
         {
-            var command = new DeleteLibraryCommand(id);
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            return Ok(await _mediator.Send(new DeleteLibraryCommand(id)));
         }
 
         [HttpGet(nameof(GetById))]
@@ -51,9 +45,7 @@ namespace Libraries.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<LibraryDto>> GetById(int id)
         {
-            var query = new GetLibraryByIdQuery(id);
-            var results = await _mediator.Send(query);
-            return Ok(results);
+            return Ok(await _mediator.Send(new GetLibraryByIdQuery(id)));
         }
     }
 }

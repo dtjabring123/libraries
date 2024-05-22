@@ -3,7 +3,7 @@ using Libraries.Application.Dtos;
 using Libraries.Domain.Interfaces;
 using MediatR;
 
-namespace Libraries.Application.Queries.Handlers
+namespace Libraries.Application.Queries.Library.Handlers
 {
     public class GetLibraryByIdHandler : IRequestHandler<GetLibraryByIdQuery, LibraryDto>
     {

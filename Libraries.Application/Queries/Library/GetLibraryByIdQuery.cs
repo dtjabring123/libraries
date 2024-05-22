@@ -1,7 +1,7 @@
 ﻿using Libraries.Application.Dtos;
 using MediatR;
 
-namespace Libraries.Application.Queries
+namespace Libraries.Application.Queries.Library
 {
     public class GetLibraryByIdQuery : IRequest<LibraryDto>
     {
