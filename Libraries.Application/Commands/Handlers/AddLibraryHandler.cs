@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Libraries.Application.Dtos;
-using Libraries.Domain.Interfaces;
 using Libraries.Domain.Entities;
+using Libraries.Domain.Interfaces;
 using MediatR;
 
 namespace Libraries.Application.Commands.Handlers
