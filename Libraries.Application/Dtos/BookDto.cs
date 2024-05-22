@@ -1,6 +1,4 @@
-﻿using Libraries.Domain.Entities;
-
-namespace Libraries.Application.Dtos
+﻿namespace Libraries.Application.Dtos
 {
     public class BookDto
     {
