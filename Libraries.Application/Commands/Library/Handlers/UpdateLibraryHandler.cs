@@ -17,13 +17,13 @@ namespace Libraries.Application.Commands.Library.Handlers
             _mapper = mapper;
         }
 
-        public async Task<LibraryDto> Handle(UpdateLibraryCommand command, CancellationToken cancellationToken)
+        public async Task<LibraryDto> Handle(UpdateLibraryCommand request, CancellationToken cancellationToken)
         {
             var library = new LibraryEntity
             {
-                Id = command.Id,
-                Name = command.Name,
-                Description = command.Description
+                Id = request.Id,
+                Name = request.Name,
+                Description = request.Description
             };
             return _mapper.Map<LibraryDto>(await _libraryRepository.Update(library));
         }

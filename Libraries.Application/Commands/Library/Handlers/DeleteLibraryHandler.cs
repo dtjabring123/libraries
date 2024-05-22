@@ -16,11 +16,9 @@ namespace Libraries.Application.Commands.Library.Handlers
             _mapper = mapper;
         }
 
-        public async Task<LibraryDto> Handle(DeleteLibraryCommand command, CancellationToken cancellationToken)
+        public async Task<LibraryDto> Handle(DeleteLibraryCommand request, CancellationToken cancellationToken)
         {
-            var id = command.Id;
-            var result = await _libraryRepository.Delete(id);
-            return _mapper.Map<LibraryDto>(result);
+            return _mapper.Map<LibraryDto>(await _libraryRepository.Delete(request.Id));
         }
     }
 }

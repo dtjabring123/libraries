@@ -17,15 +17,15 @@ namespace Libraries.Application.Commands.Book.Handlers
             _mapper = mapper;
         }
 
-        public async Task<BookDto> Handle(AddBookCommand command, CancellationToken cancellationToken)
+        public async Task<BookDto> Handle(AddBookCommand request, CancellationToken cancellationToken)
         {
             var book = new BookEntity
             {
-                AuthorId = command.AuthorId,
-                LibraryId = command.LibraryId,
-                UserId = command.UserId,
-                Title = command.Title,
-                Description = command.Description,
+                AuthorId = request.AuthorId,
+                LibraryId = request.LibraryId,
+                UserId = request.UserId,
+                Title = request.Title,
+                Description = request.Description,
             };
             return _mapper.Map<BookDto>(await _bookRepository.Add(book));
         }
