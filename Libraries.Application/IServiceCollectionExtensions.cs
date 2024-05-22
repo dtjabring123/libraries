@@ -1,6 +1,7 @@
 ﻿using Libraries.Application.Commands.Library;
 using Libraries.Application.Queries.Library;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace Libraries.Application
 {
@@ -8,10 +9,7 @@ namespace Libraries.Application
     {
         public static void RegisterMediatRDependencies(this IServiceCollection services)
         {
-            services.AddMediatR(option => option.RegisterServicesFromAssemblies(typeof(GetAllLibrariesQuery).Assembly));
-            services.AddMediatR(option => option.RegisterServicesFromAssemblies(typeof(GetLibraryByIdQuery).Assembly));
-            services.AddMediatR(option => option.RegisterServicesFromAssemblies(typeof(AddLibraryCommand).Assembly));
-            services.AddMediatR(option => option.RegisterServicesFromAssemblies(typeof(DeleteLibraryCommand).Assembly));
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
         }
     }
 }

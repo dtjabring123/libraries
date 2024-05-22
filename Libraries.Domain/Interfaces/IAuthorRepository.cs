@@ -6,7 +6,7 @@ namespace Libraries.Domain.Interfaces
     {
         public Task<AuthorEntity> Add(AuthorEntity entity);
 
-        public Task<AuthorEntity> Delete(AuthorEntity entity);
+        public Task<AuthorEntity> Delete(int id);
 
         public Task<AuthorEntity> Update(AuthorEntity entity);
     }
