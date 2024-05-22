@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Libraries.Api.Controllers
 {
     [ApiController]
+    [Route("[controller]")]
     public class LibraryController : ControllerBase
     {
         private readonly IMediator _mediator;

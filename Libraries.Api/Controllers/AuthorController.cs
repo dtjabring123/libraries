@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Libraries.Api.Controllers
 {
     [ApiController]
+    [Route("[controller]")]
     public class AuthorController : ControllerBase
     {
         private readonly IMediator _mediator;
