@@ -25,7 +25,15 @@ namespace Libraries.Api.Controllers
             return Ok(await _mediator.Send(new AddLibraryCommand(library)));
         }
 
-        [HttpPost(nameof(Delete))]
+        [HttpPatch(nameof(Update))]
+        [ProducesResponseType<LibraryDto>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<LibraryDto>> Update(UpdateLibraryDto library)
+        {
+            return Ok(await _mediator.Send(new UpdateLibraryCommand(library)));
+        }
+
+        [HttpDelete(nameof(Delete))]
         [ProducesResponseType<LibraryDto>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<LibraryDto>> Delete(int id)
@@ -47,14 +55,6 @@ namespace Libraries.Api.Controllers
         public async Task<ActionResult<LibraryDto>> GetById(int id)
         {
             return Ok(await _mediator.Send(new GetLibraryByIdQuery(id)));
-        }
-
-        [HttpPost(nameof(Update))]
-        [ProducesResponseType<LibraryDto>(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<LibraryDto>> Update(UpdateLibraryDto library)
-        {
-            return Ok(await _mediator.Send(new UpdateLibraryCommand(library)));
         }
     }
 }

@@ -25,20 +25,20 @@ namespace Libraries.Api.Controllers
             return Ok(await _mediator.Send(new AddAuthorCommand(author)));
         }
 
-        [HttpPost(nameof(Delete))]
-        [ProducesResponseType<AuthorDto>(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<AuthorDto>> Delete(int id)
-        {
-            return Ok(await _mediator.Send(new DeleteAuthorCommand(id)));
-        }
-
-        [HttpPost(nameof(Update))]
+        [HttpPatch(nameof(Update))]
         [ProducesResponseType<AuthorDto>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<AuthorDto>> Update(UpdateAuthorDto author)
         {
             return Ok(await _mediator.Send(new UpdateAuthorCommand(author)));
+        }
+
+        [HttpDelete(nameof(Delete))]
+        [ProducesResponseType<AuthorDto>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<AuthorDto>> Delete(int id)
+        {
+            return Ok(await _mediator.Send(new DeleteAuthorCommand(id)));
         }
     }
 }

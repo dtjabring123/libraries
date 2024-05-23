@@ -15,8 +15,16 @@ namespace Libraries.Infrastructure.Repositories
 
         public async Task<BookEntity> Add(BookEntity book)
         {
-            await _dbContext.Books.AddAsync(book);
-            await _dbContext.SaveChangesAsync();
+            var author = _dbContext.Authors.Any(e => e.Id == book.AuthorId);
+            if (!author)
+            {
+                throw new ArgumentException("author not found");
+            }
+            else
+            {
+                await _dbContext.Books.AddAsync(book);
+                await _dbContext.SaveChangesAsync();
+            }
             return book;
         }
 
@@ -34,8 +42,16 @@ namespace Libraries.Infrastructure.Repositories
 
         public async Task<BookEntity> Update(BookEntity book)
         {
-            _dbContext.Books.Update(book);
-            await _dbContext.SaveChangesAsync();
+            var author = _dbContext.Authors.Any(e => e.Id == book.AuthorId);
+            if (!author)
+            {
+                throw new ArgumentException("author not found");
+            }
+            else
+            {
+                _dbContext.Books.Update(book);
+                await _dbContext.SaveChangesAsync();
+            }
             return book;
         }
     }
