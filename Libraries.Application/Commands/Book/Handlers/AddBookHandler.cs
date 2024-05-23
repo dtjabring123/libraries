@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Libraries.Application.Dtos;
+using Libraries.Application.Dtos.Book;
 using Libraries.Domain.Entities;
 using Libraries.Domain.Interfaces;
 using MediatR;

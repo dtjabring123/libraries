@@ -1,5 +1,9 @@
 ﻿using AutoMapper;
 using Libraries.Application.Dtos;
+using Libraries.Application.Dtos.Author;
+using Libraries.Application.Dtos.Book;
+using Libraries.Application.Dtos.Library;
+using Libraries.Application.Dtos.User;
 using Libraries.Domain.Entities;
 
 namespace Libraries.Api

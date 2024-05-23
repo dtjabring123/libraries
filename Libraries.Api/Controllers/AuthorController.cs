@@ -1,5 +1,6 @@
 ﻿using Libraries.Application.Commands.Author;
 using Libraries.Application.Dtos;
+using Libraries.Application.Dtos.Author;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

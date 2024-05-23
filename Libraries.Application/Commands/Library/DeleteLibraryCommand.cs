@@ -1,4 +1,4 @@
-﻿using Libraries.Application.Dtos;
+﻿using Libraries.Application.Dtos.Library;
 using MediatR;
 
 namespace Libraries.Application.Commands.Library

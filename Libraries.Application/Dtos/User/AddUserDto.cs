@@ -1,4 +1,4 @@
-﻿namespace Libraries.Application.Dtos
+﻿namespace Libraries.Application.Dtos.User
 {
     public class AddUserDto
     {

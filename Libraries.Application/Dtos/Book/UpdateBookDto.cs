@@ -1,7 +1,8 @@
-﻿namespace Libraries.Application.Dtos
+﻿namespace Libraries.Application.Dtos.Book
 {
-    public class AddBookDto
+    public class UpdateBookDto
     {
+        public int Id { get; set; }
         public int AuthorId { get; set; }
         public int? LibraryId { get; set; }
         public int? UserId { get; set; }

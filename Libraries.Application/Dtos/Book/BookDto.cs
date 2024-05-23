@@ -1,4 +1,6 @@
-﻿namespace Libraries.Application.Dtos
+﻿using Libraries.Application.Dtos.Library;
+
+namespace Libraries.Application.Dtos.Book
 {
     public class BookDto
     {
