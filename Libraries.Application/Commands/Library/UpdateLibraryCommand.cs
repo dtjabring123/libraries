@@ -9,7 +9,7 @@ namespace Libraries.Application.Commands.Library
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
 
-        public UpdateLibraryCommand(LibraryDto library)
+        public UpdateLibraryCommand(UpdateLibraryDto library)
         {
             Id = library.Id;
             Name = library.Name;

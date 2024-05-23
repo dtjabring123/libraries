@@ -35,7 +35,7 @@ namespace Libraries.Api.Controllers
         [HttpPost(nameof(Update))]
         [ProducesResponseType<AuthorDto>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<AuthorDto>> Update(AuthorDto author)
+        public async Task<ActionResult<AuthorDto>> Update(UpdateAuthorDto author)
         {
             return Ok(await _mediator.Send(new UpdateAuthorCommand(author)));
         }

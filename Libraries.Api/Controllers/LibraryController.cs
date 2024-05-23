@@ -52,7 +52,7 @@ namespace Libraries.Api.Controllers
         [HttpPost(nameof(Update))]
         [ProducesResponseType<LibraryDto>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<LibraryDto>> Update(LibraryDto library)
+        public async Task<ActionResult<LibraryDto>> Update(UpdateLibraryDto library)
         {
             return Ok(await _mediator.Send(new UpdateLibraryCommand(library)));
         }

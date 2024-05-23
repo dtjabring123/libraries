@@ -14,7 +14,7 @@ namespace Libraries.Application.Commands.Author
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
 
-        public UpdateAuthorCommand(AuthorDto author)
+        public UpdateAuthorCommand(UpdateAuthorDto author)
         {
             Id = author.Id;
             Name = author.Name;
