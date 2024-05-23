@@ -30,6 +30,10 @@ namespace Libraries.Infrastructure.Repositories
                 _dbContext.Authors.Update(author);
                 await _dbContext.SaveChangesAsync();
             }
+            else
+            {
+                throw new ArgumentException("author not found");
+            }
             return author;
         }
 

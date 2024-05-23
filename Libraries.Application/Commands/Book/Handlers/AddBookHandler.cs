@@ -22,8 +22,6 @@ namespace Libraries.Application.Commands.Book.Handlers
             var book = new BookEntity
             {
                 AuthorId = request.AuthorId,
-                LibraryId = request.LibraryId,
-                UserId = request.UserId,
                 Title = request.Title,
                 Description = request.Description,
             };

@@ -42,5 +42,21 @@ namespace Libraries.Api.Controllers
         {
             return Ok(await _mediator.Send(new DeleteUserCommand(id)));
         }
+
+        [HttpPut(nameof(AddToLibrary))]
+        [ProducesResponseType<UserDto>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<UserDto>> AddToLibrary(int userId, int libraryId)
+        {
+            return Ok(await _mediator.Send(new AddUserToLibraryCommand(userId, libraryId)));
+        }
+
+        [HttpPut(nameof(RemoveFromLibrary))]
+        [ProducesResponseType<UserDto>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<UserDto>> RemoveFromLibrary(int id)
+        {
+            return Ok(await _mediator.Send(new RemoveUserFromLibraryCommand(id)));
+        }
     }
 }

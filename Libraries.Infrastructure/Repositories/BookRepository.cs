@@ -15,15 +15,89 @@ namespace Libraries.Infrastructure.Repositories
 
         public async Task<BookEntity> Add(BookEntity book)
         {
-            var author = _dbContext.Authors.Any(e => e.Id == book.AuthorId);
-            if (!author)
-            {
-                throw new ArgumentException("author not found");
-            }
-            else
+            var author = await _dbContext.Authors.FindAsync(book.AuthorId);
+            if (author != null)
             {
                 await _dbContext.Books.AddAsync(book);
                 await _dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                throw new ArgumentException("author not found");
+            }
+            return book;
+        }
+
+        public async Task<BookEntity> AddCheckOut(int bookId, int userId)
+        {
+            var book = await _dbContext.Books.FindAsync(bookId);
+            if (book != null)
+            {
+                var user = await _dbContext.Users.FindAsync(userId);
+                if (user != null)
+                {
+                    book.UserId = userId;
+                    book.IsCheckedOut = true;
+                    _dbContext.Books.Update(book);
+                    await _dbContext.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new ArgumentException("user not found");
+                }
+            }
+            else
+            {
+                throw new ArgumentException("book not found");
+            }
+            return book;
+        }
+
+        public async Task<BookEntity> AddReserve(int bookId, int userId)
+        {
+            var book = await _dbContext.Books.FindAsync(bookId);
+            if (book != null)
+            {
+                var user = await _dbContext.Users.FindAsync(userId);
+                if (user != null)
+                {
+                    book.UserId = userId;
+                    book.IsReserved = true;
+                    _dbContext.Books.Update(book);
+                    await _dbContext.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new ArgumentException("user not found");
+                }
+            }
+            else
+            {
+                throw new ArgumentException("book not found");
+            }
+            return book;
+        }
+
+        public async Task<BookEntity> AddToLibrary(int bookId, int libraryId)
+        {
+            var book = await _dbContext.Books.FindAsync(bookId);
+            if (book != null)
+            {
+                var library = await _dbContext.Libraries.FindAsync(libraryId);
+                if (library != null)
+                {
+                    book.LibraryId = libraryId;
+                    _dbContext.Books.Update(book);
+                    await _dbContext.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new ArgumentException("library not found");
+                }
+            }
+            else
+            {
+                throw new ArgumentException("book not found");
             }
             return book;
         }
@@ -37,20 +111,74 @@ namespace Libraries.Infrastructure.Repositories
                 _dbContext.Books.Update(book);
                 await _dbContext.SaveChangesAsync();
             }
+            else
+            {
+                throw new ArgumentException("book not found");
+            }
+            return book;
+        }
+
+        public async Task<BookEntity> RemoveCheckOut(int id)
+        {
+            var book = await _dbContext.Books.FindAsync(id);
+            if (book != null)
+            {
+                book.UserId = null;
+                book.IsCheckedOut = false;
+                _dbContext.Books.Update(book);
+                await _dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                throw new ArgumentException("book not found");
+            }
+            return book;
+        }
+
+        public async Task<BookEntity> RemoveFromLibrary(int id)
+        {
+            var book = await _dbContext.Books.FindAsync(id);
+            if (book != null)
+            {
+                book.LibraryId = null;
+                _dbContext.Books.Update(book);
+                await _dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                throw new ArgumentException("book not found");
+            }
+            return book;
+        }
+
+        public async Task<BookEntity> RemoveReserve(int id)
+        {
+            var book = await _dbContext.Books.FindAsync(id);
+            if (book != null)
+            {
+                book.UserId = null;
+                book.IsReserved = false;
+                _dbContext.Books.Update(book);
+                await _dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                throw new ArgumentException("book not found");
+            }
             return book;
         }
 
         public async Task<BookEntity> Update(BookEntity book)
         {
-            var author = _dbContext.Authors.Any(e => e.Id == book.AuthorId);
-            if (!author)
-            {
-                throw new ArgumentException("author not found");
-            }
-            else
+            var author = await _dbContext.Authors.FindAsync(book.AuthorId);
+            if (author != null)
             {
                 _dbContext.Books.Update(book);
                 await _dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                throw new ArgumentException("author not found");
             }
             return book;
         }

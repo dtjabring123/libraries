@@ -23,8 +23,6 @@ namespace Libraries.Application.Commands.Book.Handlers
             {
                 Id = request.Id,
                 AuthorId = request.AuthorId,
-                LibraryId = request.LibraryId,
-                UserId = request.UserId,
                 Title = request.Title,
                 Description = request.Description,
             };

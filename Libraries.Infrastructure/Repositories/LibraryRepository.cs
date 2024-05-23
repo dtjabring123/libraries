@@ -30,6 +30,10 @@ namespace Libraries.Infrastructure.Repositories
                 _dbContext.Libraries.Update(library);
                 await _dbContext.SaveChangesAsync();
             }
+            else
+            {
+                throw new ArgumentException("library not found");
+            }
             return library;
         }
 
