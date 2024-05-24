@@ -27,7 +27,6 @@ namespace Libraries.Infrastructure.Repositories
             if (author != null)
             {
                 author.IsDeleted = true;
-                _dbContext.Authors.Update(author);
                 await _dbContext.SaveChangesAsync();
             }
             else
@@ -39,7 +38,7 @@ namespace Libraries.Infrastructure.Repositories
 
         public async Task<IEnumerable<AuthorEntity>> GetAll()
         {
-            return await _dbContext.Authors.ToListAsync();
+            return await _dbContext.Authors.AsNoTracking().ToListAsync();
         }
 
         public async Task<AuthorEntity> GetById(int id)
@@ -54,8 +53,16 @@ namespace Libraries.Infrastructure.Repositories
 
         public async Task<AuthorEntity> Update(AuthorEntity author)
         {
-            _dbContext.Authors.Update(author);
-            await _dbContext.SaveChangesAsync();
+            if (await _dbContext.Authors.AnyAsync(a => a.Id == author.Id))
+            {
+                _dbContext.Authors.Update(author);
+                await _dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                throw new ArgumentException("author not found");
+            }
+
             return author;
         }
     }

@@ -39,7 +39,7 @@ namespace Libraries.Infrastructure.Repositories
 
         public async Task<IEnumerable<LibraryEntity>> GetAll()
         {
-            return await _dbContext.Libraries.ToListAsync();
+            return await _dbContext.Libraries.AsNoTracking().ToListAsync();
         }
 
         public async Task<LibraryEntity> GetById(int id)
@@ -54,8 +54,16 @@ namespace Libraries.Infrastructure.Repositories
 
         public async Task<LibraryEntity> Update(LibraryEntity library)
         {
-            _dbContext.Libraries.Update(library);
-            await _dbContext.SaveChangesAsync();
+            if (await _dbContext.Libraries.AnyAsync(l => l.Id == library.Id))
+            {
+                _dbContext.Libraries.Update(library);
+                await _dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                throw new ArgumentException("library not found");
+            }
+
             return library;
         }
     }

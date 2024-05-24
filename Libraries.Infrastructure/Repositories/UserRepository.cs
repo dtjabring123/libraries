@@ -26,11 +26,10 @@ namespace Libraries.Infrastructure.Repositories
             var user = await _dbContext.Users.FindAsync(userId);
             if (user != null)
             {
-                var library = await _dbContext.Libraries.FindAsync(libraryId);
-                if (library != null)
+                var library = await _dbContext.Libraries.AnyAsync(l => l.Id == libraryId);
+                if (library)
                 {
                     user.LibraryId = libraryId;
-                    _dbContext.Users.Update(user);
                     await _dbContext.SaveChangesAsync();
                 }
                 else
@@ -51,7 +50,6 @@ namespace Libraries.Infrastructure.Repositories
             if (user != null)
             {
                 user.IsDeleted = true;
-                _dbContext.Users.Update(user);
                 await _dbContext.SaveChangesAsync();
             }
             else
@@ -69,7 +67,7 @@ namespace Libraries.Infrastructure.Repositories
             }
             else
             {
-                return await _dbContext.Users.Where(e => e.LibraryId == libraryId).ToListAsync();
+                return await _dbContext.Users.AsNoTracking().Where(e => e.LibraryId == libraryId).ToListAsync();
             }
         }
 
@@ -89,7 +87,6 @@ namespace Libraries.Infrastructure.Repositories
             if (user != null)
             {
                 user.LibraryId = null;
-                _dbContext.Users.Update(user);
                 await _dbContext.SaveChangesAsync();
             }
             else
@@ -101,8 +98,16 @@ namespace Libraries.Infrastructure.Repositories
 
         public async Task<UserEntity> Update(UserEntity user)
         {
-            _dbContext.Users.Update(user);
-            await _dbContext.SaveChangesAsync();
+            if (await _dbContext.Users.AnyAsync(u => u.Id == user.Id))
+            {
+                _dbContext.Users.Update(user);
+                await _dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                throw new ArgumentException("user not found");
+            }
+
             return user;
         }
     }
