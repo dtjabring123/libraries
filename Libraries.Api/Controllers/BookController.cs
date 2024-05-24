@@ -1,8 +1,6 @@
 ﻿using Libraries.Application.Commands.Book;
-using Libraries.Application.Dtos;
 using Libraries.Application.Dtos.Book;
 using Libraries.Application.Queries.Book;
-using Libraries.Application.Queries.User;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

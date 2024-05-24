@@ -21,7 +21,6 @@ namespace Libraries.Application.Commands.User.Handlers
         {
             var user = new UserEntity
             {
-                LibraryId = request.LibraryId,
                 Name = request.Name,
                 Email = request.Email,
             };

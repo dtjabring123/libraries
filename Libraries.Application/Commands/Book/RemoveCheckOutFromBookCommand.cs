@@ -1,11 +1,5 @@
-﻿using AutoMapper.Configuration.Conventions;
-using Libraries.Application.Dtos.Book;
+﻿using Libraries.Application.Dtos.Book;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Libraries.Application.Commands.Book
 {

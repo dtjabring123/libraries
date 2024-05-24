@@ -1,13 +1,9 @@
-﻿using Libraries.Application.Commands.Author;
-using Libraries.Application.Dtos.Author;
+﻿using Libraries.Application.Commands.User;
 using Libraries.Application.Dtos;
+using Libraries.Application.Dtos.User;
+using Libraries.Application.Queries.User;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Libraries.Application.Dtos.User;
-using Libraries.Application.Commands.User;
-using Libraries.Application.Dtos.Library;
-using Libraries.Application.Queries.Library;
-using Libraries.Application.Queries.User;
 
 namespace Libraries.Api.Controllers
 {
