@@ -8,6 +8,10 @@ namespace Libraries.Domain.Interfaces
 
         public Task<AuthorEntity> Delete(int id);
 
+        public Task<ICollection<AuthorEntity>> GetAll();
+
+        public Task<AuthorEntity> GetById(int id);
+
         public Task<AuthorEntity> Update(AuthorEntity entity);
     }
 }

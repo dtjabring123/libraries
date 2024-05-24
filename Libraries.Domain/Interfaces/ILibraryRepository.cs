@@ -8,7 +8,7 @@ namespace Libraries.Domain.Interfaces
 
         public Task<LibraryEntity> Delete(int id);
 
-        public Task<List<LibraryEntity>> GetAll();
+        public Task<ICollection<LibraryEntity>> GetAll();
 
         public Task<LibraryEntity> GetById(int id);
 

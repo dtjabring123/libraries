@@ -1,6 +1,7 @@
 ﻿using Libraries.Domain.Entities;
 using Libraries.Domain.Interfaces;
 using Libraries.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace Libraries.Infrastructure.Repositories
 {
@@ -54,6 +55,28 @@ namespace Libraries.Infrastructure.Repositories
                 await _dbContext.SaveChangesAsync();
             }
             else
+            {
+                throw new ArgumentException("user not found");
+            }
+            return user;
+        }
+
+        public async Task<ICollection<UserEntity>> GetAll(int libraryId = 0)
+        {
+            if (libraryId == 0)
+            {
+                return await _dbContext.Users.ToListAsync();
+            }
+            else
+            {
+                return await _dbContext.Users.Where(e => e.LibraryId == libraryId).ToListAsync();
+            }
+        }
+
+        public async Task<UserEntity> GetById(int id)
+        {
+            var user = await _dbContext.Users.FindAsync(id);
+            if (user == null)
             {
                 throw new ArgumentException("user not found");
             }

@@ -14,6 +14,24 @@ namespace Libraries.Domain.Interfaces
 
         public Task<BookEntity> Delete(int id);
 
+        public Task<ICollection<BookEntity>> GetAll(int libraryId);
+
+        public Task<ICollection<BookEntity>> GetAllCheckedOut(int libraryId);
+
+        public Task<ICollection<BookEntity>> GetAllCheckedOutForUser(int userId);
+
+        public Task<ICollection<BookEntity>> GetAllCheckedOutWithAuthor(int libraryId, int authorId);
+
+        public Task<ICollection<BookEntity>> GetAllReserved(int libraryId);
+
+        public Task<ICollection<BookEntity>> GetAllReservedForUser(int userId);
+
+        public Task<ICollection<BookEntity>> GetAllReservedWithAuthor(int libraryId, int authorId);
+
+        public Task<ICollection<BookEntity>> GetAllWithAuthor(int libraryId, int authorId);
+
+        public Task<BookEntity> GetById(int id);
+
         public Task<BookEntity> RemoveCheckOut(int id);
 
         public Task<BookEntity> RemoveFromLibrary(int id);

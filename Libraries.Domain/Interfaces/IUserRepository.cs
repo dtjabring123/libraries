@@ -10,6 +10,10 @@ namespace Libraries.Domain.Interfaces
 
         public Task<UserEntity> Delete(int id);
 
+        public Task<ICollection<UserEntity>> GetAll(int libraryId = 0);
+
+        public Task<UserEntity> GetById(int id);
+
         public Task<UserEntity> RemoveFromLibrary(int id);
 
         public Task<UserEntity> Update(UserEntity user);

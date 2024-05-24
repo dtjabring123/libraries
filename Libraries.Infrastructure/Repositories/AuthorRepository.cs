@@ -37,6 +37,21 @@ namespace Libraries.Infrastructure.Repositories
             return author;
         }
 
+        public async Task<ICollection<AuthorEntity>> GetAll()
+        {
+            return await _dbContext.Authors.ToListAsync();
+        }
+
+        public async Task<AuthorEntity> GetById(int id)
+        {
+            var author = await _dbContext.Authors.FindAsync(id);
+            if (author == null)
+            {
+                throw new ArgumentException("author not found");
+            }
+            return author;
+        }
+
         public async Task<AuthorEntity> Update(AuthorEntity author)
         {
             _dbContext.Authors.Update(author);

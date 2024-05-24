@@ -37,14 +37,19 @@ namespace Libraries.Infrastructure.Repositories
             return library;
         }
 
-        public async Task<List<LibraryEntity>> GetAll()
+        public async Task<ICollection<LibraryEntity>> GetAll()
         {
             return await _dbContext.Libraries.ToListAsync();
         }
 
         public async Task<LibraryEntity> GetById(int id)
         {
-            return await _dbContext.Libraries.FindAsync(id);
+            var library = await _dbContext.Libraries.FindAsync(id);
+            if (library == null)
+            {
+                throw new ArgumentException("library not found");
+            }
+            return library;
         }
 
         public async Task<LibraryEntity> Update(LibraryEntity library)

@@ -1,6 +1,8 @@
 ﻿using Libraries.Domain.Entities;
 using Libraries.Domain.Interfaces;
 using Libraries.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace Libraries.Infrastructure.Repositories
 {
@@ -112,6 +114,132 @@ namespace Libraries.Infrastructure.Repositories
                 await _dbContext.SaveChangesAsync();
             }
             else
+            {
+                throw new ArgumentException("book not found");
+            }
+            return book;
+        }
+
+        public async Task<ICollection<BookEntity>> GetAll(int libraryId)
+        {
+            if (libraryId == 0)
+            {
+                return await _dbContext.Books.ToListAsync();
+            }
+            else
+            {
+                return await _dbContext.Books.Where(e => e.LibraryId == libraryId).ToListAsync();
+            }
+        }
+
+        public async Task<ICollection<BookEntity>> GetAllCheckedOut(int libraryId)
+        {
+            if (libraryId == 0)
+            {
+                return await _dbContext.Books.Where(e => e.IsCheckedOut == true).ToListAsync();
+            }
+            else
+            {
+                return await _dbContext.Books.Where(e => e.LibraryId == libraryId && e.IsCheckedOut == true).ToListAsync();
+            }
+        }
+
+        public async Task<ICollection<BookEntity>> GetAllCheckedOutForUser(int userId)
+        {
+            var user = await _dbContext.Users.FindAsync(userId);
+            if (user == null)
+            {
+                throw new ArgumentException("user not found");
+            }
+            return (ICollection<BookEntity>)await _dbContext.Users.Where(u => u.Id == userId).Include(e => e.Books.Where(b => b.IsCheckedOut)).ToListAsync();
+        }
+
+        public async Task<ICollection<BookEntity>> GetAllCheckedOutWithAuthor(int libraryId, int authorId)
+        {
+            var author = await _dbContext.Books.FindAsync(authorId);
+            if (author == null)
+            {
+                throw new ArgumentException("author not found");
+            }
+            else
+            {
+                if (libraryId == 0)
+                {
+                    return await _dbContext.Books.Where(e => e.IsCheckedOut == true && e.AuthorId == authorId).ToListAsync();
+                }
+                else
+                {
+                    return await _dbContext.Books.Where(e => e.LibraryId == libraryId && e.IsCheckedOut == true && e.AuthorId == authorId).ToListAsync();
+                }
+            }
+        }
+
+        public async Task<ICollection<BookEntity>> GetAllReserved(int libraryId)
+        {
+            if (libraryId == 0)
+            {
+                return await _dbContext.Books.Where(e => e.IsReserved == true).ToListAsync();
+            }
+            else
+            {
+                return await _dbContext.Books.Where(e => e.LibraryId == libraryId && e.IsReserved == true).ToListAsync();
+            }
+        }
+
+        public async Task<ICollection<BookEntity>> GetAllReservedForUser(int userId)
+        {
+            var user = await _dbContext.Users.FindAsync(userId);
+            if (user == null)
+            {
+                throw new ArgumentException("user not found");
+            }
+            return (ICollection<BookEntity>)await _dbContext.Users.Where(u => u.Id == userId).Include(e => e.Books.Where(b => b.IsReserved)).ToListAsync();
+        }
+
+        public async Task<ICollection<BookEntity>> GetAllReservedWithAuthor(int libraryId, int authorId)
+        {
+            var author = await _dbContext.Books.FindAsync(authorId);
+            if (author == null)
+            {
+                throw new ArgumentException("author not found");
+            }
+            else
+            {
+                if (libraryId == 0)
+                {
+                    return await _dbContext.Books.Where(e => e.IsReserved == true && e.AuthorId == authorId).ToListAsync();
+                }
+                else
+                {
+                    return await _dbContext.Books.Where(e => e.LibraryId == libraryId && e.IsReserved == true && e.AuthorId == authorId).ToListAsync();
+                }
+            }
+        }
+
+        public async Task<ICollection<BookEntity>> GetAllWithAuthor(int libraryId, int authorId)
+        {
+            var author = await _dbContext.Books.FindAsync(authorId);
+            if (author == null)
+            {
+                throw new ArgumentException("author not found");
+            }
+            else
+            {
+                if (libraryId == 0)
+                {
+                    return await _dbContext.Books.Where(e => e.AuthorId == authorId).ToListAsync();
+                }
+                else
+                {
+                    return await _dbContext.Books.Where(e => e.LibraryId == libraryId && e.AuthorId == authorId).ToListAsync();
+                }
+            }
+        }
+
+        public async Task<BookEntity> GetById(int id)
+        {
+            var book = await _dbContext.Books.FindAsync(id);
+            if (book == null)
             {
                 throw new ArgumentException("book not found");
             }
