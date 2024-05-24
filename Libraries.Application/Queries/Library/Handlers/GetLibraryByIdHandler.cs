@@ -18,9 +18,7 @@ namespace Libraries.Application.Queries.Library.Handlers
 
         public async Task<LibraryDto> Handle(GetLibraryByIdQuery request, CancellationToken cancellationToken)
         {
-            var id = request.Id;
-            var libraryEntity = await _libraryRepository.GetById(id);
-            return _mapper.Map<LibraryDto>(libraryEntity);
+            return _mapper.Map<LibraryDto>(await _libraryRepository.GetById(request.Id));
         }
     }
 }

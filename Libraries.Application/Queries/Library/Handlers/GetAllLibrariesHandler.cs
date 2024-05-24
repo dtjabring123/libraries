@@ -18,8 +18,7 @@ namespace Libraries.Application.Queries.Library.Handlers
 
         public async Task<IEnumerable<LibraryDto>> Handle(GetAllLibrariesQuery request, CancellationToken cancellationToken)
         {
-            var librariesEntity = await _libraryRepository.GetAll();
-            return librariesEntity.Select(_mapper.Map<LibraryDto>);
+            return (await _libraryRepository.GetAll()).Select(_mapper.Map<LibraryDto>);
         }
     }
 }

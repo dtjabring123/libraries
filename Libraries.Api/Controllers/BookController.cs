@@ -1,5 +1,8 @@
 ﻿using Libraries.Application.Commands.Book;
+using Libraries.Application.Dtos;
 using Libraries.Application.Dtos.Book;
+using Libraries.Application.Queries.Book;
+using Libraries.Application.Queries.User;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -86,6 +89,78 @@ namespace Libraries.Api.Controllers
         public async Task<ActionResult<BookDto>> RemoveFromLibrary(int id)
         {
             return Ok(await _mediator.Send(new RemoveBookFromLibraryCommand(id)));
+        }
+
+        [HttpGet(nameof(GetAll))]
+        [ProducesResponseType<IEnumerable<BookDto>>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<BookDto>>> GetAll(int libraryId = 0)
+        {
+            return Ok(await _mediator.Send(new GetAllBooksQuery(libraryId)));
+        }
+
+        [HttpGet(nameof(GetById))]
+        [ProducesResponseType<IEnumerable<BookDto>>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<BookDto>> GetById(int id)
+        {
+            return Ok(await _mediator.Send(new GetBookByIdQuery(id)));
+        }
+
+        [HttpGet(nameof(GetAllCheckedOut))]
+        [ProducesResponseType<IEnumerable<BookDto>>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<BookDto>>> GetAllCheckedOut(int libraryId = 0)
+        {
+            return Ok(await _mediator.Send(new GetAllBooksCheckedOutQuery(libraryId)));
+        }
+
+        [HttpGet(nameof(GetAllReserved))]
+        [ProducesResponseType<IEnumerable<BookDto>>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<BookDto>>> GetAllReserved(int libraryId = 0)
+        {
+            return Ok(await _mediator.Send(new GetAllBooksReservedQuery(libraryId)));
+        }
+
+        [HttpGet(nameof(GetAllCheckedOutForUser))]
+        [ProducesResponseType<IEnumerable<BookDto>>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<BookDto>>> GetAllCheckedOutForUser(int userId)
+        {
+            return Ok(await _mediator.Send(new GetAllBooksCheckedOutForUserQuery(userId)));
+        }
+
+        [HttpGet(nameof(GetAllReservedForUser))]
+        [ProducesResponseType<IEnumerable<BookDto>>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<BookDto>>> GetAllReservedForUser(int userId)
+        {
+            return Ok(await _mediator.Send(new GetAllBooksReservedForUserQuery(userId)));
+        }
+
+        [HttpGet(nameof(GetAllWithAuthor))]
+        [ProducesResponseType<IEnumerable<BookDto>>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<BookDto>>> GetAllWithAuthor(int authorId, int libraryId = 0)
+        {
+            return Ok(await _mediator.Send(new GetAllBooksWithAuthorQuery(authorId, libraryId)));
+        }
+
+        [HttpGet(nameof(GetAllCheckedOutWithAuthor))]
+        [ProducesResponseType<IEnumerable<BookDto>>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<BookDto>>> GetAllCheckedOutWithAuthor(int authorId, int libraryId = 0)
+        {
+            return Ok(await _mediator.Send(new GetAllBooksCheckedOutWithAuthorQuery(authorId, libraryId)));
+        }
+
+        [HttpGet(nameof(GetAllReservedWithAuthor))]
+        [ProducesResponseType<IEnumerable<BookDto>>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<BookDto>>> GetAllReservedWithAuthor(int authorId, int libraryId = 0)
+        {
+            return Ok(await _mediator.Send(new GetAllBooksReservedWithAuthorQuery(authorId, libraryId)));
         }
     }
 }

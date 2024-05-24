@@ -37,7 +37,7 @@ namespace Libraries.Infrastructure.Repositories
             return library;
         }
 
-        public async Task<ICollection<LibraryEntity>> GetAll()
+        public async Task<IEnumerable<LibraryEntity>> GetAll()
         {
             return await _dbContext.Libraries.ToListAsync();
         }

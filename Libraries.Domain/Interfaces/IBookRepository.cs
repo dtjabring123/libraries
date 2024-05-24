@@ -14,21 +14,21 @@ namespace Libraries.Domain.Interfaces
 
         public Task<BookEntity> Delete(int id);
 
-        public Task<ICollection<BookEntity>> GetAll(int libraryId);
+        public Task<IEnumerable<BookEntity>> GetAll(int libraryId = 0);
 
-        public Task<ICollection<BookEntity>> GetAllCheckedOut(int libraryId);
+        public Task<IEnumerable<BookEntity>> GetAllCheckedOut(int libraryId = 0);
 
-        public Task<ICollection<BookEntity>> GetAllCheckedOutForUser(int userId);
+        public Task<IEnumerable<BookEntity>> GetAllCheckedOutForUser(int userId);
 
-        public Task<ICollection<BookEntity>> GetAllCheckedOutWithAuthor(int libraryId, int authorId);
+        public Task<IEnumerable<BookEntity>> GetAllCheckedOutWithAuthor(int authorId, int libraryId = 0);
 
-        public Task<ICollection<BookEntity>> GetAllReserved(int libraryId);
+        public Task<IEnumerable<BookEntity>> GetAllReserved(int libraryId = 0);
 
-        public Task<ICollection<BookEntity>> GetAllReservedForUser(int userId);
+        public Task<IEnumerable<BookEntity>> GetAllReservedForUser(int userId);
 
-        public Task<ICollection<BookEntity>> GetAllReservedWithAuthor(int libraryId, int authorId);
+        public Task<IEnumerable<BookEntity>> GetAllReservedWithAuthor(int authorId, int libraryId = 0);
 
-        public Task<ICollection<BookEntity>> GetAllWithAuthor(int libraryId, int authorId);
+        public Task<IEnumerable<BookEntity>> GetAllWithAuthor(int authorId, int libraryId = 0);
 
         public Task<BookEntity> GetById(int id);
 

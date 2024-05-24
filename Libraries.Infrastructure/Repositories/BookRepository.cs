@@ -120,7 +120,7 @@ namespace Libraries.Infrastructure.Repositories
             return book;
         }
 
-        public async Task<ICollection<BookEntity>> GetAll(int libraryId)
+        public async Task<IEnumerable<BookEntity>> GetAll(int libraryId = 0)
         {
             if (libraryId == 0)
             {
@@ -132,7 +132,7 @@ namespace Libraries.Infrastructure.Repositories
             }
         }
 
-        public async Task<ICollection<BookEntity>> GetAllCheckedOut(int libraryId)
+        public async Task<IEnumerable<BookEntity>> GetAllCheckedOut(int libraryId = 0)
         {
             if (libraryId == 0)
             {
@@ -144,17 +144,17 @@ namespace Libraries.Infrastructure.Repositories
             }
         }
 
-        public async Task<ICollection<BookEntity>> GetAllCheckedOutForUser(int userId)
+        public async Task<IEnumerable<BookEntity>> GetAllCheckedOutForUser(int userId)
         {
             var user = await _dbContext.Users.FindAsync(userId);
             if (user == null)
             {
                 throw new ArgumentException("user not found");
             }
-            return (ICollection<BookEntity>)await _dbContext.Users.Where(u => u.Id == userId).Include(e => e.Books.Where(b => b.IsCheckedOut)).ToListAsync();
+            return (IEnumerable<BookEntity>)await _dbContext.Users.Where(u => u.Id == userId).Include(e => e.Books.Where(b => b.IsCheckedOut)).ToListAsync();
         }
 
-        public async Task<ICollection<BookEntity>> GetAllCheckedOutWithAuthor(int libraryId, int authorId)
+        public async Task<IEnumerable<BookEntity>> GetAllCheckedOutWithAuthor(int authorId, int libraryId = 0)
         {
             var author = await _dbContext.Books.FindAsync(authorId);
             if (author == null)
@@ -174,7 +174,7 @@ namespace Libraries.Infrastructure.Repositories
             }
         }
 
-        public async Task<ICollection<BookEntity>> GetAllReserved(int libraryId)
+        public async Task<IEnumerable<BookEntity>> GetAllReserved(int libraryId = 0)
         {
             if (libraryId == 0)
             {
@@ -186,17 +186,17 @@ namespace Libraries.Infrastructure.Repositories
             }
         }
 
-        public async Task<ICollection<BookEntity>> GetAllReservedForUser(int userId)
+        public async Task<IEnumerable<BookEntity>> GetAllReservedForUser(int userId)
         {
             var user = await _dbContext.Users.FindAsync(userId);
             if (user == null)
             {
                 throw new ArgumentException("user not found");
             }
-            return (ICollection<BookEntity>)await _dbContext.Users.Where(u => u.Id == userId).Include(e => e.Books.Where(b => b.IsReserved)).ToListAsync();
+            return (IEnumerable<BookEntity>)await _dbContext.Users.Where(u => u.Id == userId).Include(e => e.Books.Where(b => b.IsReserved)).ToListAsync();
         }
 
-        public async Task<ICollection<BookEntity>> GetAllReservedWithAuthor(int libraryId, int authorId)
+        public async Task<IEnumerable<BookEntity>> GetAllReservedWithAuthor(int authorId, int libraryId = 0)
         {
             var author = await _dbContext.Books.FindAsync(authorId);
             if (author == null)
@@ -216,7 +216,7 @@ namespace Libraries.Infrastructure.Repositories
             }
         }
 
-        public async Task<ICollection<BookEntity>> GetAllWithAuthor(int libraryId, int authorId)
+        public async Task<IEnumerable<BookEntity>> GetAllWithAuthor(int authorId, int libraryId = 0)
         {
             var author = await _dbContext.Books.FindAsync(authorId);
             if (author == null)

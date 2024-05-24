@@ -37,7 +37,7 @@ namespace Libraries.Infrastructure.Repositories
             return author;
         }
 
-        public async Task<ICollection<AuthorEntity>> GetAll()
+        public async Task<IEnumerable<AuthorEntity>> GetAll()
         {
             return await _dbContext.Authors.ToListAsync();
         }

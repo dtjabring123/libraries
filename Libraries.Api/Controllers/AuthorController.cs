@@ -1,6 +1,9 @@
 ﻿using Libraries.Application.Commands.Author;
 using Libraries.Application.Dtos;
 using Libraries.Application.Dtos.Author;
+using Libraries.Application.Dtos.Library;
+using Libraries.Application.Queries.Author;
+using Libraries.Application.Queries.Library;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,6 +42,22 @@ namespace Libraries.Api.Controllers
         public async Task<ActionResult<AuthorDto>> Delete(int id)
         {
             return Ok(await _mediator.Send(new DeleteAuthorCommand(id)));
+        }
+
+        [HttpGet(nameof(GetAll))]
+        [ProducesResponseType<IEnumerable<AuthorDto>>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<AuthorDto>>> GetAll()
+        {
+            return Ok(await _mediator.Send(new GetAllAuthorsQuery()));
+        }
+
+        [HttpGet(nameof(GetById))]
+        [ProducesResponseType<IEnumerable<AuthorDto>>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<AuthorDto>> GetById(int id)
+        {
+            return Ok(await _mediator.Send(new GetAuthorByIdQuery(id)));
         }
     }
 }

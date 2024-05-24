@@ -5,6 +5,9 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Libraries.Application.Dtos.User;
 using Libraries.Application.Commands.User;
+using Libraries.Application.Dtos.Library;
+using Libraries.Application.Queries.Library;
+using Libraries.Application.Queries.User;
 
 namespace Libraries.Api.Controllers
 {
@@ -57,6 +60,22 @@ namespace Libraries.Api.Controllers
         public async Task<ActionResult<UserDto>> RemoveFromLibrary(int id)
         {
             return Ok(await _mediator.Send(new RemoveUserFromLibraryCommand(id)));
+        }
+
+        [HttpGet(nameof(GetAll))]
+        [ProducesResponseType<IEnumerable<UserDto>>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<UserDto>>> GetAll(int libraryId = 0)
+        {
+            return Ok(await _mediator.Send(new GetAllUsersQuery(libraryId)));
+        }
+
+        [HttpGet(nameof(GetById))]
+        [ProducesResponseType<IEnumerable<UserDto>>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<UserDto>> GetById(int id)
+        {
+            return Ok(await _mediator.Send(new GetUserByIdQuery(id)));
         }
     }
 }

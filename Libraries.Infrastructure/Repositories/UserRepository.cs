@@ -61,7 +61,7 @@ namespace Libraries.Infrastructure.Repositories
             return user;
         }
 
-        public async Task<ICollection<UserEntity>> GetAll(int libraryId = 0)
+        public async Task<IEnumerable<UserEntity>> GetAll(int libraryId = 0)
         {
             if (libraryId == 0)
             {
